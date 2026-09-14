@@ -1,0 +1,87 @@
+configuration {
+    modi: "drun";
+    font: "Cantarell 11";
+    show-icons: false;
+}
+
+* {
+    /* Pure stealth black theme */
+    bg:           #050505;
+    bg-alt:       #121212; /* Slightly lighter for distinct input section */
+    bg-select:    #181818;
+    border-color: #2a2a2a;
+    fg:           #ffffff;
+    fg-alt:       #a0a0a0;
+
+    background-color: transparent;
+    text-color: @fg;
+}
+
+window {
+    background-color: @bg;
+    border: 1px;
+    border-color: @border-color;
+    /* Removed width property to restore Rofi's default size */
+    padding: 0px; 
+}
+
+mainbox {
+    background-color: @bg;
+    spacing: 0px;
+    children: [ inputbar, listview ];
+}
+
+inputbar {
+    background-color: @bg-alt;
+    /* Creates a distinct, sharp border separating the input section from the list */
+    border: 0px 0px 2px 0px;
+    border-color: @border-color; 
+    padding: 14px 18px;
+}
+
+prompt {
+    background-color: inherit;
+    text-color: @fg-alt;
+    padding: 0px 10px 0px 0px;
+    font: "Cantarell Bold 11"; /* Bold prompt to anchor the section */
+}
+
+entry {
+    background-color: inherit;
+    text-color: @fg;
+    placeholder: "Search applications...";
+    placeholder-color: #555555;
+}
+
+listview {
+    background-color: @bg;
+    lines: 10;
+    spacing: 0px;
+    padding: 8px 0px; /* Gives padding inside the results section */
+    scrollstyle: false;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg;
+    padding: 10px 18px;
+    /* Clean baseline border for unselected items */
+    border: 0px 0px 0px 3px;
+    border-color: transparent;
+}
+
+/* Handles the sleek selection with the tiny white accent line */
+element selected {
+    background-color: @bg-select;
+    text-color: @fg;
+    
+    /* Full covering height, but a tiny 3px wide pure white line on the left edge */
+    border: 0px 0px 0px 3px;
+    border-color: #ffffff; 
+}
+
+element-text {
+    background-color: inherit;
+    text-color: inherit;
+    vertical-align: 0.5;
+}

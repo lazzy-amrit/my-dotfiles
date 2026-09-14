@@ -1,0 +1,30 @@
+{
+  "cli_default_open_behavior": "existing_window",
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "icon_theme": "Zed (Default)",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark"
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "unstable.ui_density": "compact",
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false
+  },
+  "status_bar": {
+    "active_language_button": false
+  },
+  "scrollbar": {
+    "symbols_selections": false
+  },
+  "cursor_blink": false
+}
