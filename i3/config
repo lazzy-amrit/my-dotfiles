@@ -146,8 +146,8 @@ bindsym $mod+r mode "resize"
 default_border pixel 0
 default_floating_border pixel 0
 
-#wallpaper using xwallpaper
-exec_always --no-startup-id xwallpaper --zoom ~/Wallpapers/l2.png
+#wallpaper — fading cycler, see services/wallshift.sh
+exec_always --no-startup-id ~/.config/services/wallshift.sh
 
 #gaps like hyprland
 gaps inner 10
@@ -195,8 +195,8 @@ bindsym Print exec scrot ~/Pictures/ss/%Y-%m-%d_%H-%M-%S.png && notify-send "Scr
 bindsym Shift+Print exec scrot -s ~/Pictures/ss/%Y-%m-%d_%H-%M-%S.png && notify-send "Screenshot saved"
 
 #brightness controlling
-bindsym Control+Shift+plus exec ~/.config/brightness.sh up
-bindsym Control+Shift+minus exec ~/.config/brightness.sh down
+bindsym Control+Shift+plus exec ~/.config/services/brightness.sh up
+bindsym Control+Shift+minus exec ~/.config/services/brightness.sh down
 
 #Semms like warm mode buddy
 bindsym control+d exec gammastep -O 5000
