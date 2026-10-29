@@ -25,7 +25,7 @@ A lazy person's i3wm setup — built to be **light enough that it doesn't need a
 
 ## Packages
 
-Only **`legcord`** needs the AUR — everything else is in Arch's official repos.
+Only **`vesktop`** needs the AUR — everything else is in Arch's official repos.
 
 **Using pacman** (official repo packages):
 ```bash
@@ -34,7 +34,7 @@ sudo pacman -S i3-wm rofi kitty picom dunst pipewire wireplumber thunar scrot ga
 
 **Using yay** (covers the AUR-only package, plus everything above works through yay too):
 ```bash
-yay -S i3-wm rofi kitty picom dunst pipewire wireplumber thunar scrot gammastep xwallpaper zed legcord
+yay -S i3-wm rofi kitty picom dunst pipewire wireplumber thunar scrot gammastep xwallpaper zed vesktop
 ```
 
 > **Important:** never run `yay` with `sudo`, and never build AUR packages as root — `makepkg` refuses to run as root outright, so it's not a workaround that "just needs more permission." If `yay` throws a permission error, `sudo yay ...` is not the fix; it's almost always a stale build cache (`yay -Sc`) or a missing `base-devel` group (`sudo pacman -S base-devel`). `pacman`, on the other hand, always needs `sudo` — that's just normal system package installation, nothing to route around.
@@ -52,7 +52,7 @@ yay -S i3-wm rofi kitty picom dunst pipewire wireplumber thunar scrot gammastep 
 | **gammastep** | Screen color temperature / warmth control |
 | **xwallpaper** | Sets the wallpaper |
 | **zed** | Code editor |
-| **legcord** (AUR) | Discord client — works well, but I'm not 100% sold it's the *best* option out there, so feel free to swap it |
+| **vesktop** (AUR) | Discord client — lighter than the stock app; swap in `legcord` or anything else if you prefer |
 
 > Note: package names above are correct at time of writing — always sanity-check with `pacman -Ss <name>` / `yay -Ss <name>` if something doesn't resolve, since names occasionally change.
 
@@ -66,7 +66,11 @@ yay -S i3-wm rofi kitty picom dunst pipewire wireplumber thunar scrot gammastep 
 
 **Brightness control (even on monitors that don't support it).** Some displays don't expose real hardware brightness control. Instead of skipping that feature, `brightness.sh` fakes it by dimming the screen with a dark overlay — works everywhere, no hardware dependency. Adjust the dim strength directly inside `~/.config/services/brightness.sh`.
 
-**Wallpaper (via `xwallpaper`).** Wallpapers fade-cycle smoothly using `~/.config/services/wallshift.sh`. It caches every fade transition to disk the first time it's seen, so after the first cycle through your wallpapers it costs basically zero CPU on repeats — good for weak/no-GPU hardware.
+**Wallpaper (via `xwallpaper`).** The i3 config ships with a simple static zoom wallpaper:
+```bash
+exec_always --no-startup-id xwallpaper --zoom ~/Pictures/Wallpapers/d.jpg
+```
+If you'd rather have wallpapers fade-cycle smoothly, swap that line back to `~/.config/services/wallshift.sh`. The script caches every fade transition to disk the first time it's seen, so after the first cycle through your wallpapers it costs basically zero CPU on repeats — good for weak/no-GPU hardware.
 
 Wallpapers are pulled from a folder set at the top of the script:
 ```bash
@@ -109,6 +113,28 @@ Volume and mute use `wpctl` directly on the default audio sink and fire a notifi
 
 ---
 
+## Repository structure
+
+The repo root **is** `~/.config/` — clone it there (or symlink the folders you want) and everything lands where the configs expect it.
+
+| Path | What it is | Tracked |
+|---|---|---|
+| `i3/` | Window manager config + `bar.sh` (built-in i3bar status script) | yes |
+| `services/` | Helper scripts: `wallshift.sh` (wallpaper cycler), `brightness.sh` (software dimming) | yes |
+| `kitty/` `rofi/` `picom/` `dunst/` | Terminal, launcher, compositor, notifications | yes |
+| `zed/` `fastfetch/` | Editor settings, CLI system-info | yes |
+| `Thunar/` `xfce4/` `dconf/` | File manager + desktop settings | yes |
+| `systemd/` | User units (rclone mounts) | yes |
+| `mimeapps.list` `kilo/` `opencode/` | Default-app associations, agent configs | yes |
+| `examples/` | Screenshots used in this readme | yes |
+| `rclone/` | rclone remotes — **contains credentials, never tracked** | no |
+| `cava/` `vesktop/` `mozilla/` `mukio/` `pulse/` `yay/` | App state / caches | no |
+| `Code - OSS/` `glib-2.0/` `.wrangler/` `nextjs-nodejs/` `google-chrome-for-testing/` | Runtime app data, telemetry, caches | no |
+
+`.gitignore` is the single source of truth for what stays out — anything app-generated goes there, anything you'd want on a fresh machine gets tracked.
+
+---
+
 ## Installation
 
 ```bash
@@ -122,7 +148,20 @@ git clone https://github.com/lazzy-amrit/my-dotfiles.git
 cd my-dotfiles
 ```
 
-Then symlink or copy the folders you want into `~/.config/`, install the packages above, and restart i3 (`$mod+Shift+r`) to load everything.
+Then either clone straight over `~/.config`, or symlink the folders you want:
+
+```bash
+# back up anything already there, then link what you care about
+mkdir -p ~/.config.bak
+for d in i3 services kitty rofi picom dunst zed fastfetch; do
+  mv ~/.config/"$d" ~/.config.bak/ 2>/dev/null
+  ln -s ~/my-dotfiles/"$d" ~/.config/"$d"
+done
+```
+
+Install the packages above and restart i3 (`$mod+Shift+r`) to load everything.
+
+> This is a dotfiles repo, not a package: `rclone/`, browser/editor profiles and other app state are gitignored on purpose, so a fresh clone only brings over the configs.
 
 ---
 

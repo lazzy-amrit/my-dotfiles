@@ -11,7 +11,7 @@ set -euo pipefail
 
 ### CONFIG — tweak these ###
 WALLPAPER_DIR="${WALLSHIFT_DIR:-$HOME/Pictures/Wallpapers}"
-INTERVAL=300          # seconds a wallpaper stays before the next fade starts
+INTERVAL=1800          # seconds a wallpaper stays before the next fade starts
 FADE_STEPS=20         # blend frames per transition (higher = smoother, more cache space)
 FADE_DURATION=1.2     # total seconds the fade itself should take
 RANDOM_ORDER=false    # true = shuffle once at startup, false = alphabetical loop

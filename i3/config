@@ -147,7 +147,7 @@ default_border pixel 0
 default_floating_border pixel 0
 
 #wallpaper — fading cycler, see services/wallshift.sh
-exec_always --no-startup-id ~/.config/services/wallshift.sh
+exec_always --no-startup-id xwallpaper --zoom ~/Pictures/Wallpapers/d.jpg
 
 #gaps like hyprland
 gaps inner 10

@@ -1,4 +1,10 @@
+
 {
+  "agent": {
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": []
+  },
   "cli_default_open_behavior": "existing_window",
   "session": {
     "trust_all_worktrees": true
@@ -26,5 +32,52 @@
   "scrollbar": {
     "symbols_selections": false
   },
-  "cursor_blink": false
+  "cursor_blink": false,
+  "lsp": {
+    "basedpyright": {
+      "settings": {
+        "python": {
+          "venvPath": ".",
+          "venv": ".venv"
+        },
+        "basedpyright.analysis": {
+          "typeCheckingMode": "standard",
+          "diagnosticMode": "openFilesOnly",
+          "reportMissingImports": "warning",
+          "reportMissingTypeStubs": false,
+          "reportUnusedImport": "none",
+          "reportUnusedVariable": "none",
+          "reportGeneralTypeIssues": "warning"
+        }
+      }
+    },
+    "ruff": {
+      "settings": {
+        "args": [
+          "--ignore",
+          "F401,F841,I001,E501"
+        ]
+      }
+    }
+  },
+  "languages": {
+    "Python": {
+      "language_servers": [
+        "basedpyright",
+        "ruff"
+      ],
+      "format_on_save": "on",
+      "formatter": {
+        "language_server": {
+          "name": "ruff"
+        }
+      }
+    },
+    "JavaScript": {
+      "format_on_save": "on"
+    },
+    "TypeScript": {
+      "format_on_save": "on"
+    }
+  }
 }

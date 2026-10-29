@@ -1,0 +1,14 @@
+[Unit]
+Description=FileLu rclone mount
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/rclone mount filelu: %h/filelu --vfs-cache-mode off --dir-cache-time 5s --attr-timeout 1s --buffer-size 0 --tpslimit 4
+ExecStop=/usr/bin/fusermount3 -u %h/filelu
+Restart=on-failure
+RestartSec=30
+
+[Install]
+WantedBy=default.target
