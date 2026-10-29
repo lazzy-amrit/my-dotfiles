@@ -191,8 +191,8 @@ exec_always picom --config ~/.config/picom/picom.conf
 exec_always dunst
 
 #screenshots
-bindsym Print exec scrot ~/Pictures/ss/%Y-%m-%d_%H-%M-%S.png && notify-send "Screenshot saved"
-bindsym Shift+Print exec scrot -s ~/Pictures/ss/%Y-%m-%d_%H-%M-%S.png && notify-send "Screenshot saved"
+bindsym Print exec scrot ~/filelu/Media/ss/%Y-%m-%d_%H-%M-%S.png && notify-send "Screenshot saved"
+bindsym Shift+Print exec scrot -s ~/filelu/Media/ss/%Y-%m-%d_%H-%M-%S.png && notify-send "Screenshot saved"
 
 #brightness controlling
 bindsym Control+Shift+plus exec ~/.config/services/brightness.sh up
